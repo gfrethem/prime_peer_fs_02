@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+main {
+  text-align: center;
+}
+a {
+  color: #00B7FF;
+}
+img {
+  height: auto;
+  width: auto;
+  max-width: 90%;
+  max-height: 90%;
+}
+.image {
+  float: left;
+  height: 400px;
+  width: 400px;
+
+}
