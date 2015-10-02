@@ -1,7 +1,7 @@
 /**
  * Created by gfrethem on 10/1/15.
  */
-$(function() {
+$(function () {
 
     //Declare global variables
     //var tempUrl = "";
@@ -13,15 +13,16 @@ $(function() {
         type: "GET",
         dataType: "json",
         url: '/cute',
-        complete: function() {
+        complete: function () {
             console.log('AJAX2 complete');
         },
-        success: function(data) {
+        success: function (data) {
             numImages = data.length;
             for (var i = 0; i < numImages; i++) {
                 cuteArray[i] = i;
             }
             shuffleArray(cuteArray);
+            shiftAndSearch();
             shiftAndSearch();
             shiftAndSearch();
             shiftAndSearch();
@@ -35,28 +36,28 @@ $(function() {
             type: "GET",
             dataType: "json",
             url: '/cute/' + cuteId,
-            complete: function() {
+            complete: function () {
                 console.log('AJAX complete');
             },
-            success: function(data) {
-                console.log("THIS IS THE DATA: " + data);
-                console.log(data.url);
+            success: function (data) {
+                //console.log("THIS IS THE DATA: " + data);
+                //console.log(data.url);
                 appendToScreen(cuteId, data.url);
             }
         });
     }
 
-    function appendToScreen(currentImage, tempUrl){
-        console.log("TEMPURL IS: " + tempUrl);
+    function appendToScreen(currentImage, tempUrl) {
+        //console.log("TEMPURL IS: " + tempUrl);
 
-        var $whatToAppend = "<div class=image " + currentImage + "><img src=" + tempUrl + "></div>";
+        var $whatToAppend = '<div class=image ' + currentImage + '><img src=' + tempUrl
+            + '><br><button class="removeMe">I HATES THIS ONE</button></div>';
         $(".adorable").append($whatToAppend);
     }
 
 
-
     function shuffleArray(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex ;
+        var currentIndex = array.length, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
@@ -83,22 +84,22 @@ $(function() {
         cuteArray.push(currentImage);
         //console.log(cuteArray);
     }
+
+    $(document).on('click', '.removeMe', function () {
+        $(this).parent().remove();
+        shiftAndSearch();
+
+    });
+
+    $(".newDeck").on('click', function () {
+        $("main").children().remove();
+        shuffleArray(cuteArray);
+        shiftAndSearch();
+        shiftAndSearch();
+        shiftAndSearch();
+        shiftAndSearch();
+        shiftAndSearch();
+        shiftAndSearch();
+    });
+
 });
-
-
-
-
-
-//
-//var whatNumAreWeOn = 5;
-//
-//function to display the first 5 images in imageArray
-//
-//On button click to swap out an image:
-//    remove image that's there
-//    append imageArray[whatNumAreWeOn];
-//    whatNumAreWeOn++
-//
-//On button click to generate deck:
-//    whatNumAreWeOn = 5;
-//    function to display the first 5 images in imageArray
